@@ -1,0 +1,68 @@
+<!--
+<div class="container">
+  <div class="" id="left-side">
+    <sidemenu [device]="device" [dest]="destination"></sidemenu>
+  </div>
+  <div class="" id="right-side">
+      <pricetabs [dest]="destination"></pricetabs>
+    <div *ngFor="let app of apps">
+      <ng-container *ngIf="app.isActive">
+        <app-detail [app]="app" ></app-detail>
+      </ng-container>      
+    </div>
+    <button (click)="loadMore()">Load More</button>
+
+  </div>
+
+</div>-->
+<!--
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side"
+    [opened]="mobileQuery.matches ? 'false' : 'true'" disableClose>
+      <button mat-button (click)="sidenav.toggle()">Toggle</button>
+      <sidemenu [device]="device" [dest]="destination">        
+      </sidemenu>
+    </mat-sidenav>
+    <mat-sidenav position="end">App Description</mat-sidenav>
+      <mat-sidenav-content>
+        <pricetabs [dest]="destination"></pricetabs>
+        <div *ngFor="let app of apps">
+          <ng-container *ngIf="app.isActive">
+            <app-detail [app]="app" ></app-detail>
+          </ng-container>      
+        </div>
+        <button (click)="loadMore()">Load More</button>
+      </mat-sidenav-content>
+</mat-sidenav-container>
+-->
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side"
+    [opened]="mobileQuery.matches ? 'false' : 'true'" disableClose>
+      <button mat-button (click)="sidenav.toggle()">Toggle</button>
+      <sidemenu [device]="device" [dest]="destination">        
+      </sidemenu>
+    </mat-sidenav>
+    <mat-sidenav position="end">App Description</mat-sidenav>
+      <mat-sidenav-content>
+          <mat-tab-group color="primary">
+              <mat-tab label="All">
+                  <ng-template matTabContent>
+                    <applist [price]="0" [apps]="apps"></applist>
+                  </ng-template>
+              </mat-tab>
+              <mat-tab label="Free">
+                  <ng-template matTabContent>
+                      <applist [price]="1" [apps]="apps"></applist>
+                  </ng-template>
+              </mat-tab>
+              <mat-tab label="Paid">
+                  <ng-template matTabContent>
+                      <applist [price]="2" [apps]="apps"></applist>
+                  </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+        <button (click)="loadMore()">Load More</button>
+      </mat-sidenav-content>
+</mat-sidenav-container>
+
+

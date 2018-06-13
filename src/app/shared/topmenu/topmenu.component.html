@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row class="mat-toolbar-row">
+        <span>AppStoreNews</span>
+        <a mat-button routerLink="/deals">iOs Deals</a>
+        <a mat-button routerLinkActive="active" routerLink="/deals-mac">Mac Deals</a>
+        <a mat-button routerLink="/top-apps">Top Charts</a>
+        <a mat-button routerLink="/new-apps">Newest Apps</a>
+        <a mat-button routerLink="/userarea" routerLinkActive="active">Admin</a>
+        <div class="search-form-container">
+            
+            <input #search (focus)="search.style.width='100%'" matInput type="text" placeholder="Suchen"/>
+            <button mat-button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="search.value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+            
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

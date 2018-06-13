@@ -1,0 +1,7 @@
+<input (keyup)="search($event.target.value)" id="name" placeholder="Search"/>
+
+<ul>
+  <li *ngFor="let app of apps$ | async">
+    <app-detail [app]="app"></app-detail>
+  </li>
+</ul>

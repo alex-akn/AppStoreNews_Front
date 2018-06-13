@@ -1,0 +1,5 @@
+<ng-container *ngFor="let app of apps">
+    <ng-container *ngIf="app.isActive && isGoodPrice(app.newprice)">
+        <app-detail [app]="app" ></app-detail>
+    </ng-container>
+</ng-container>

@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+body{
+    margin: 0;
+}
+
+.container{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+mat-toolbar mat-toolbar-row {
+    padding: 0 16px 0 0;
+    display: flex;
+    box-sizing: border-box;    
+    width: 100%;
+    height: 64px;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+}
+div.search-form-container{
+    display: flex;
+    justify-content: flex-end;    
+    width: 100%;
+    min-width: 150px;
+    height: 100%;
+    align-items: center;
+}
+
+div.search-form-container input{
+    color: #333;
+    border: none;
+    border-radius: 100px;
+    box-sizing: border-box;    
+    padding: 5px 40px 5px 16px;
+    margin-left: 8px;
+    width: 180px;
+    max-width: 240px;
+    height: 50%;
+    font-size: 16px;    
+    letter-spacing: .3px;
+    font-weight: 400;
+    outline-width: 0;
+    -webkit-appearance: none;
+}
+div.search-form-container button{
+    color: #000;
+    position: relative;
+    margin-left: -40px;
+    z-index: 2;
+}
+
+
+@media (max-width: 767px){
+    .container {
+        width: 100%;
+    }
+
+    mat-sidenav {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px){
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px){
+    .container {
+        width: 970px;
+    }
+
+    div.search-form-container input{
+        transition: width .4s ease-in-out;
+    }
+
+}
+
+@media (min-width: 1200px){
+    .container {
+        width: 1170px;
+    }
+}
