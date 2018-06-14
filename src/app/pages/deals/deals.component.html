@@ -15,7 +15,7 @@
   </div>
 
 </div>-->
-<!--
+
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side"
     [opened]="mobileQuery.matches ? 'false' : 'true'" disableClose>
@@ -26,16 +26,41 @@
     <mat-sidenav position="end">App Description</mat-sidenav>
       <mat-sidenav-content>
         <pricetabs [dest]="destination"></pricetabs>
-        <div *ngFor="let app of apps">
-          <ng-container *ngIf="app.isActive">
-            <app-detail [app]="app" ></app-detail>
-          </ng-container>      
+        <div class="slide-wrapper">
+        <ng-container *ngIf="!sliding">
+          <div id="listOne" [@listState]="listOneState"
+          >
+            <applist [apps]="listOne"></applist>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="sliding">
+          <div id="listTwo" [@listState]="listTwoState">
+              <applist [apps]="listTwo"></applist>
+          </div>
+        </ng-container>
         </div>
+        <!--
+        <ng-container *ngFor="let app of activeApps">           
+            <div [@appState]="app.state" >
+                <app-detail [app]="app" ></app-detail>
+            </div>            
+        </ng-container>
+
+        <div *ngIf="sliding" [@someState]="">
+          <ng-container *ngFor="let app of inactiveApps">           
+              <div [@appState]="app.state" >
+                  <app-detail [app]="app" ></app-detail>
+              </div>            
+          </ng-container>
+        </div>
+        -->
+
         <button (click)="loadMore()">Load More</button>
       </mat-sidenav-content>
 </mat-sidenav-container>
--->
-<mat-sidenav-container>
+
+<!--
+  <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side"
     [opened]="mobileQuery.matches ? 'false' : 'true'" disableClose>
       <button mat-button (click)="sidenav.toggle()">Toggle</button>
@@ -64,5 +89,5 @@
         <button (click)="loadMore()">Load More</button>
       </mat-sidenav-content>
 </mat-sidenav-container>
-
+-->
 

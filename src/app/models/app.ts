@@ -14,6 +14,7 @@ export default class App {
     genres: any;
     dev: string;
     isActive:boolean=true;
+    state:string;
     catNames:string;
     maxWidth:string;
     device: number;

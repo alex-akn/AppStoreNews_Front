@@ -12,13 +12,15 @@ import { IntercomService } from '../../shared/intercom.service';
 import App from '../../models/app';
 import { Param } from '../../models/param';
 import { CATEGORIES } from '../../models/categories';
+import { listAnimation } from '../../shared/animations';
 
 const paths = {'deals':'pdrops', 'deals-mac':'pdrops', 'new-apps':'news'};
 
 @Component({
   selector: 'app-deals',
   templateUrl: './deals.component.html',
-  styleUrls: ['./deals.component.css']
+  styleUrls: ['./deals.component.css'],
+  animations: [ listAnimation ]
 })
 export class DealsComponent implements OnInit, OnDestroy {
   device: number = 2;
@@ -28,6 +30,11 @@ export class DealsComponent implements OnInit, OnDestroy {
   //offset: number = 0;
   lang:string = 'de'
   apps: App[] = [];
+  listOne: App[] = [];
+  listTwo: App[] = [];
+  sliding: boolean = false;
+  listOneState: string;
+  listTwoState: string;
   destination:string;
 
   mobileQuery: MediaQueryList;
@@ -73,11 +80,27 @@ export class DealsComponent implements OnInit, OnDestroy {
   }
 
   handleAddedParams(params: Param[]){    
-    params.forEach(param => {      
+    params.forEach(param => {
+      if(param.name == 'price') { this.changeAppState(param.value); }
       this[param.name] = param.value;
     })
     this.refresh();
     //return Observable.of();
+  }
+
+  changeAppState(price: number){
+    if((this.price === 1 && price === 2) || (this.price === 2 && price === 1)){
+      this.sliding = this.sliding ? false : true;
+    }
+    else if(this.price === 0 && price === 1){
+      this.listOneState = 'shiftedLeft';
+      this.listTwoState = 'shiftedRight';
+    }
+    else if(this.price === 0 && price === 2){
+      this.listOneState = 'shiftedRight';
+      this.listTwoState = 'shiftedLeft';
+    }
+    
   }
 
   refresh(){
@@ -91,12 +114,15 @@ export class DealsComponent implements OnInit, OnDestroy {
       const isPrice = this.isGoodPrice(app.newprice);      
       const isDevice = this.isEligibleDevice(+app.device);
       console.log(isCat, isPrice, isDevice);     
-      if(isCat && isPrice && isDevice) {
+      if(isCat && isPrice && isDevice) {        
         app.isActive = true;
         visibleApps++;
       }
-      else  { app.isActive = false; }
-    });  
+      else  {         
+        app.isActive = false;
+       }
+    });
+    this.setActiveApps();
     console.log(visibleApps);  
     if(visibleApps < this.limit) {      
       //this.isLoading = true;
@@ -126,12 +152,23 @@ export class DealsComponent implements OnInit, OnDestroy {
       if(this.apps.every(a => a.id != app.id)) { 
         app.catNames = this.fromIdToNames(app.genres);
         app.isActive = true;
+        app.state = 'shiftedRight';
         //app.maxWidth = this.maxWidth;                
         this.apps.push(app);
       }      
     });
-    
+    this.setActiveApps();
     console.log(this.apps);
+  }
+
+  setActiveApps(){
+    if(this.sliding) { 
+      this.listTwo = this.apps.filter((app) => app.isActive);
+    }
+    else {
+      this.listOne = this.apps.filter((app) => app.isActive);
+    }
+    
   }
 
   //Converts ids into names

@@ -52,6 +52,18 @@ div.search-form-container button{
     z-index: 2;
 }
 
+.slide-wrapper{
+    position: relative;
+    width: 100%;
+    overflow: hidden;  
+}
+#listOne, #listTwo{
+    width:100%;
+}
+.media{
+    display: flex;
+}
+
 
 @media (max-width: 767px){
     .container {

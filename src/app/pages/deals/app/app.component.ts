@@ -5,7 +5,7 @@ import  App  from '../../../models/app';
 @Component({
   selector: 'app-detail',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css']  
 })
 export class AppComponent implements OnInit, OnDestroy {
   @Input() app: App;
